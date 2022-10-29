@@ -1,7 +1,7 @@
 class Genre < ApplicationRecord
 
-  has_many :games
+  has_m̀any :articles
 
-  validates :name, presence: true
+  validates :title, presence: true
 
 end
