@@ -10,7 +10,7 @@ class GamesController < ApplicationController
 
   # GET /games/1
   def show
-    render json: @games, include: [:genre]
+    render json: @game, include: [:genre]
   end
 
   # POST /games
@@ -46,6 +46,6 @@ class GamesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def game_params
-      params.require(:game).permit(:title, :genre)
+      params.require(:game).permit(:title, :genre_id, :releaseDate)
     end
 end

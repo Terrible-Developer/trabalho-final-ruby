@@ -1,9 +1,15 @@
 const ROUTES = {
-  articles: {
-    list: `/articles`,
-    new: `/articles/new`,
-    show: `/articles/[id]`,
-    edit: `/articles/[id]/edit`,
+  games: {
+    list: `/games`,
+    new: `/games/new`,
+    show: `/games/[id]`,
+    edit: `/games/[id]/edit`,
+  },
+  genres: {
+    list: `/genres`,
+    new: `/genres/new`,
+    show: `/genres/[id]`,
+    edit: `/genres/[id]/edit`,
   },
 };
 

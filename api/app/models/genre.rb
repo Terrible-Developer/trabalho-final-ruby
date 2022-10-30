@@ -1,6 +1,6 @@
 class Genre < ApplicationRecord
 
-  has_m̀any :articles
+  has_many :articles
 
   validates :title, presence: true
 

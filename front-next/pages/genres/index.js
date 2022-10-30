@@ -15,40 +15,40 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 
 // Internals
 import ROUTES from "../../src/config/routes";
-import ArticleService from "../../src/services/ArticleService";
+import GenreService from "../../src/services/GenreService";
 import { Container } from "@mui/system";
 
-function ArticleList() {
+function GenresList() {
   const { router } = useRouter();
-  const [articles, setArticles] = useState([]);
+  const [genres, setGenres] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const deleteArticle = (article) => {
+  const deleteGenre = (article) => {
     var accepted = confirm(`Você realmente gostaria de deletar o artigo: ${article.title}`);
     if (!accepted) return;
 
     setIsLoading(true);
-    ArticleService.destroy(article.id)
+    GenreService.destroy(article.id)
       .then((data) => {
-        getArticles().then(() => {
+        getGames().then(() => {
           setIsLoading(false);
-          toast.success("Article destroyed sucessfully!");
+          toast.success("Game destroyed sucessfully!");
         });
       })
       .catch((e) => {
         setIsLoading(false);
-        toast.error(`Erro when destroying article: ${e.message}`);
+        toast.error(`Erro when destroying genre: ${e.message}`);
       });
   };
 
-  const getArticles = async () => {
-    let data = await ArticleService.getAll();
+  const getGames = async () => {
+    let data = await GenreService.getAll();
     console.log(data);
-    setArticles(data);
+    setGenres(data);
   };
 
   useEffect(() => {
-    getArticles().then(() => {
+    getGames().then(() => {
       setIsLoading(false);
     });
   }, []);
@@ -59,17 +59,17 @@ function ArticleList() {
     <Container fluid>
       <Grid container mt={2}>
         <Grid xs={6}>
-            <Typography variant="h4">Articles List</Typography>
+            <Typography variant="h4">Genres List</Typography>
         </Grid>
         <Grid xs={6}>
           <p>
             <Link
               href={{
-                pathname: ROUTES.articles.new,
+                pathname: ROUTES.genres.new,
               }}
             >
               <Button variant="contained" color="success" size="small" startIcon={<DeleteForeverIcon fontSize="small" />}>
-                New Article
+                New Genre
               </Button>
             </Link>
           </p>
@@ -79,32 +79,22 @@ function ArticleList() {
             <thead>
               <tr>
                 <th>ID</th>
-                <th>Title</th>
-                <th>Author</th>
-                <th>Category</th>
-                <th>Body</th>
-                <th>Created At</th>
-                <th>Published At</th>
+                <th>Name</th>
                 <th>&nbsp;</th>
               </tr>
             </thead>
             <tbody>
-              {articles.map((article) => {
+              {genres.map((genre) => {
                 return (
-                  <tr key={article.id}>
-                    <td>{article.id}</td>
-                    <td>{article.title}</td>
-                    <td>{article.author.name}</td>
-                    <td>{article.category.name}</td>
-                    <td>{article.body}</td>
-                    <td>{article.created_at}</td>
-                    <td>{article.published_at}</td>
+                  <tr key={genre.id}>
+                    <td>{genre.id}</td>
+                    <td>{genre.title}</td>
                     <td>
                       <Link
                         href={{
-                          pathname: ROUTES.articles.show,
+                          pathname: ROUTES.genres.show,
                           query: {
-                            id: article.id,
+                            id: genre.id,
                           },
                         }}
                       >
@@ -114,9 +104,9 @@ function ArticleList() {
                       </Link>
                       <Link
                         href={{
-                          pathname: ROUTES.articles.edit,
+                          pathname: ROUTES.genres.edit,
                           query: {
-                            id: article.id,
+                            id: genre.id,
                           },
                         }}
                       >
@@ -124,7 +114,7 @@ function ArticleList() {
                           <EditIcon fontSize="small" />
                         </Button>
                       </Link>
-                      <Button variant="contained" color="error" size="small" onClick={() => deleteArticle(article)}>
+                      <Button variant="contained" color="error" size="small" onClick={() => deleteGenre(genre)}>
                         <DeleteForeverIcon fontSize="small" />
                       </Button>
                     </td>
@@ -139,4 +129,4 @@ function ArticleList() {
   );
 }
 
-export default ArticleList;
+export default GenresList;

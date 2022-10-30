@@ -10,18 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_29_052332) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_30_022312) do
   create_table "games", force: :cascade do |t|
     t.string "title"
-    t.string "genre"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "genres_id"
-    t.index ["genres_id"], name: "index_games_on_genres_id"
+    t.integer "genre_id"
+    t.string "releaseDate"
+    t.index ["genre_id"], name: "index_games_on_genre_id"
   end
 
   create_table "genres", force: :cascade do |t|
-    t.string "name"
+    t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

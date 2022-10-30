@@ -27,7 +27,7 @@ class GenresController < ApplicationController
   # PATCH/PUT /genres/1
   def update
     if @genre.update(genre_params)
-      render json: @genre
+      render json: @genre, include: [:games]
     else
       render json: @genre.errors, status: :unprocessable_entity
     end
